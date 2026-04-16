@@ -7,12 +7,15 @@ BEGIN
 		a.Id,
 		a.Name,
 		a.CategoryId,
+		c.Name AS CategoryName,
 		a.Status,
 		a.AssignedToStaffId,
-		c.Name AS CategoryName
+		s.Name AS AssignedToStaff 
 	FROM dbo.Asset a
 	LEFT JOIN Category c 
-		ON a.CategoryId = c.Id;
+		ON a.CategoryId = c.Id
+	LEFT JOIN Staff s
+		ON a.AssignedToStaffId = s.Id
 END
 GO;
 
@@ -26,12 +29,15 @@ BEGIN
         a.Id,
 		a.Name,
 		a.CategoryId,
+		c.Name AS CategoryName,
 		a.Status,
 		a.AssignedToStaffId,
-		c.Name AS CategoryName
+		s.Name AS AssignedToStaff 
     FROM dbo.Asset a
     LEFT JOIN dbo.Category c 
         ON a.CategoryId = c.Id
+	LEFT JOIN Staff s
+		ON a.AssignedToStaffId = s.Id
     WHERE a.Id = @Id;
 END
 GO
