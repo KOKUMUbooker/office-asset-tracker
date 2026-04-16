@@ -3,6 +3,7 @@ CREATE PROCEDURE sp_Asset_GetByCategory
 ( @CategoryId INT )
 AS
 BEGIN
+	SET NOCOUNT ON;
 	SELECT * FROM dbo.Asset
 	WHERE CategoryId=@CategoryId
 END
@@ -13,6 +14,7 @@ CREATE PROCEDURE sp_Asset_GetByStatus
 ( @Status NVARCHAR(50) )
 AS
 BEGIN
+	SET NOCOUNT ON;
 	SELECT * FROM dbo.Asset
 	WHERE Status=@Status
 END
@@ -23,6 +25,7 @@ CREATE PROCEDURE sp_Asset_SearchByName
 ( @Name NVARCHAR(50) )
 AS
 BEGIN
+	SET NOCOUNT ON;
 	SELECT * FROM dbo.Asset
 	WHERE Name LIKE '%' + @Name + '%'
 END
@@ -37,6 +40,7 @@ CREATE PROCEDURE sp_Asset_Filter
 )
 AS
 BEGIN
+	SET NOCOUNT ON;
 	SELECT * FROM dbo.Asset
 	WHERE
 		(CategoryId = @CategoryId OR @CategoryId IS NULL) AND
