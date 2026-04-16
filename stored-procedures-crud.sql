@@ -1,9 +1,9 @@
-/* Category stored procedures */
 /* ==================== CATEGORIES ==============================*/
 /* 1. Get all categories */
 CREATE PROCEDURE sp_Category_GetAll
 AS
 BEGIN
+	SET NOCOUNT ON;
 	SELECT * FROM dbo.Category;
 END;
 GO;
@@ -13,6 +13,7 @@ CREATE PROCEDURE sp_Category_GetById
 ( @Id INT)
 AS
 BEGIN
+	SET NOCOUNT ON;
 	SELECT * FROM dbo.Category WHERE Id=@Id;
 END;
 GO;
@@ -22,6 +23,7 @@ CREATE PROCEDURE sp_Category_Insert
 ( @CategoryName NVARCHAR(100) )
 AS
 BEGIN
+	SET NOCOUNT ON;
 	INSERT INTO dbo.Category (Name)
 	VALUES (@CategoryName)
 END;
@@ -35,7 +37,8 @@ CREATE PROCEDURE sp_Category_Update
 )
 AS
 BEGIN
-	UPDATE dbo.Category
+	SET NOCOUNT ON;
+	UPDATE dbo.Category 
 	SET Name=@NewCategoryName
 	WHERE Id=@Id
 END;
@@ -46,9 +49,8 @@ CREATE PROCEDURE sp_Category_Delete
 ( @Id INTEGER )
 AS
 BEGIN
-	DELETE 
-	FROM dbo.Category
-	WHERE Id=@Id
+	SET NOCOUNT ON;
+	DELETE FROM dbo.Category WHERE Id=@Id
 END;
 GO;
 
@@ -57,6 +59,7 @@ GO;
 CREATE PROCEDURE sp_Staff_GetAll
 AS
 BEGIN
+	SET NOCOUNT ON;
 	SELECT * FROM dbo.Staff;
 END;
 GO;
@@ -66,6 +69,7 @@ CREATE PROCEDURE sp_Staff_GetById
 ( @Id INT)
 AS
 BEGIN
+	SET NOCOUNT ON;
 	SELECT * FROM dbo.Staff WHERE Id=@Id;
 END;
 GO;
@@ -75,6 +79,7 @@ CREATE PROCEDURE sp_Staff_Insert
 ( @StaffName NVARCHAR(100) )
 AS
 BEGIN
+	SET NOCOUNT ON;
 	INSERT INTO dbo.Staff (Name)
 	VALUES (@StaffName)
 END;
@@ -88,6 +93,7 @@ CREATE PROCEDURE sp_Staff_Update
 )
 AS
 BEGIN
+	SET NOCOUNT ON;
 	UPDATE dbo.Staff
 	SET Name=@NewStaffName
 	WHERE Id=@Id
@@ -99,9 +105,8 @@ CREATE PROCEDURE sp_Staff_Delete
 ( @Id INTEGER )
 AS
 BEGIN
-	DELETE 
-	FROM dbo.Staff
-	WHERE Id=@Id
+	SET NOCOUNT ON;
+	DELETE FROM dbo.Staff WHERE Id=@Id
 END;
 GO;
 
@@ -110,6 +115,7 @@ GO;
 CREATE PROCEDURE sp_Asset_GetAll
 AS
 BEGIN
+	SET NOCOUNT ON;
 	SELECT * FROM dbo.Asset;
 END;
 GO;
@@ -119,6 +125,7 @@ CREATE PROCEDURE sp_Asset_GetById
 ( @Id INT)
 AS
 BEGIN
+	SET NOCOUNT ON;
 	SELECT * FROM dbo.Asset WHERE Id=@Id;
 END;
 GO;
@@ -132,6 +139,7 @@ CREATE PROCEDURE sp_Asset_Insert
 )
 AS
 BEGIN
+	SET NOCOUNT ON;
 	INSERT INTO dbo.Asset (Name, CategoryId, Status)
 	VALUES (@StaffName, @CategoryId, @Status)
 END;
@@ -145,6 +153,7 @@ CREATE PROCEDURE sp_Asset_Update
 )
 AS
 BEGIN
+	SET NOCOUNT ON;
 	UPDATE dbo.Asset
 	SET Name=@NewName
 	WHERE Id=@Id
@@ -156,7 +165,6 @@ CREATE PROCEDURE sp_Asset_Delete
 ( @Id INTEGER )
 AS
 BEGIN
-	DELETE 
-	FROM dbo.Asset
-	WHERE Id=@Id
+	SET NOCOUNT ON;
+	DELETE FROM dbo.Asset WHERE Id=@Id
 END;
