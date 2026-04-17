@@ -4,11 +4,25 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using office_asset_tracker.DAL;
 
 public partial class Categories : Page
 {
+    private CategoryRepository _repo;
+
+    public Categories()
+    {
+        _repo = new CategoryRepository();
+    }
+
     protected void Page_Load(object sender, EventArgs e)
     {
+        if (!IsPostBack)
+        {
+            var categories = _repo.GetCategories();
 
+            gvCategories.DataSource = categories;
+            gvCategories.DataBind();
+        }
     }
 }
