@@ -48,8 +48,7 @@
             <div class="float-right">
                 <nav>
                     <ul id="menu">
-                        <li><a runat="server" href="~/">Home</a></li>
-                        <li><a runat="server" href="~/Pages/Assets.aspx">Assets</a></li>
+                        <li><a runat="server" href="~/">Assets</a></li>
                         <li><a runat="server" href="~/Pages/Categories.aspx">Categories</a></li>
                         <li><a runat="server" href="~/Pages/Staff.aspx">Staff</a></li>
                         <li><a runat="server" href="~/Pages/Reports.aspx">Reports</a></li>
