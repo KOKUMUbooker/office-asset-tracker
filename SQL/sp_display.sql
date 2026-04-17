@@ -10,14 +10,14 @@ BEGIN
 		c.Name AS CategoryName,
 		a.Status,
 		a.AssignedToStaffId,
-		s.Name AS AssignedToStaff 
+		s.Name AS AssignedToStaffName 
 	FROM dbo.Asset a
-	LEFT JOIN Category c 
-		ON a.CategoryId = c.Id
+	LEFT JOIN dbo.Category c 
+		ON a.dbo.CategoryId = c.Id
 	LEFT JOIN Staff s
 		ON a.AssignedToStaffId = s.Id
 END
-GO;
+GO
 
 /* Get asset details including Category name by their Id */
 CREATE PROCEDURE sp_Asset_GetDetailsById
@@ -36,7 +36,7 @@ BEGIN
     FROM dbo.Asset a
     LEFT JOIN dbo.Category c 
         ON a.CategoryId = c.Id
-	LEFT JOIN Staff s
+	LEFT JOIN dbo.Staff s
 		ON a.AssignedToStaffId = s.Id
     WHERE a.Id = @Id;
 END

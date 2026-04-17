@@ -6,22 +6,22 @@ BEGIN
 	FROM dbo.Asset
 	GROUP BY Status
 END
-GO;
+GO
 
 /* Get asset counts based on category */
 CREATE PROCEDURE sp_Asset_CountByCategory
 AS
 BEGIN
-	SELECT c.Name, COUNT(a.Id) AS Count
+	SELECT c.Name as Category, COUNT(a.Id) AS Count
 	FROM dbo.Asset a
 	LEFT JOIN dbo.Category c
 		ON a.CategoryId = c.Id
 	GROUP BY c.Name
 END
-GO;
+GO
 
 /* Get assets stats totalCount,AvailableCount,AssignedCount and DamagedCount */
-CREATE PROCEDURE sp_Asset_StatsOverview
+CREATE PROCEDURE sp_Asset_ReportOverview
 AS
 BEGIN
 	SELECT 
@@ -31,4 +31,4 @@ BEGIN
     SUM(CASE WHEN Status = 'Damaged' THEN 1 ELSE 0 END) AS DamagedCount
 	FROM dbo.Asset;
 END
-GO;
+GO

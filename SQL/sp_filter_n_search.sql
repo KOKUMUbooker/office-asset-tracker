@@ -7,7 +7,7 @@ BEGIN
 	SELECT * FROM dbo.Asset
 	WHERE CategoryId=@CategoryId
 END
-GO;
+GO
 
 /* Get assets by status */
 CREATE PROCEDURE sp_Asset_GetByStatus
@@ -18,7 +18,7 @@ BEGIN
 	SELECT * FROM dbo.Asset
 	WHERE Status=@Status
 END
-GO;
+GO
 
 /* Get assets by name */
 CREATE PROCEDURE sp_Asset_SearchByName
@@ -29,7 +29,7 @@ BEGIN
 	SELECT * FROM dbo.Asset
 	WHERE Name LIKE '%' + @Name + '%'
 END
-GO;
+GO
 
 /* Get assets by a combination of CategoryId, AssignedToStaffId and Status */
 CREATE PROCEDURE sp_Asset_Filter
@@ -47,4 +47,4 @@ BEGIN
 		(AssignedToStaffId = @AssignedToStaffId OR @AssignedToStaffId IS NULL) AND
 		(Status = @Status OR @Status IS NULL)
 END
-GO;
+GO

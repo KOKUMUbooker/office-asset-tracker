@@ -6,7 +6,7 @@ BEGIN
 	SET NOCOUNT ON;
 	SELECT * FROM dbo.Category;
 END;
-GO;
+GO
 
 /*2.  Get category by Id */
 CREATE PROCEDURE sp_Category_GetById 
@@ -16,7 +16,7 @@ BEGIN
 	SET NOCOUNT ON;
 	SELECT * FROM dbo.Category WHERE Id=@Id;
 END;
-GO;
+GO
 
 /* 3. Create category */
 CREATE PROCEDURE sp_Category_Insert
@@ -27,7 +27,7 @@ BEGIN
 	INSERT INTO dbo.Category (Name)
 	VALUES (@CategoryName)
 END;
-GO;
+GO
 
 /* 4. Update category */
 CREATE PROCEDURE sp_Category_Update 
@@ -42,7 +42,7 @@ BEGIN
 	SET Name=@NewCategoryName
 	WHERE Id=@Id
 END;
-GO;
+GO
 
 /* 5. Delete category */
 CREATE PROCEDURE sp_Category_Delete 
@@ -52,7 +52,7 @@ BEGIN
 	SET NOCOUNT ON;
 	DELETE FROM dbo.Category WHERE Id=@Id
 END;
-GO;
+GO
 
 /* ==================== STAFF ==============================*/
 /* 1. Get all staff members */
@@ -62,7 +62,7 @@ BEGIN
 	SET NOCOUNT ON;
 	SELECT * FROM dbo.Staff;
 END;
-GO;
+GO
 
 /* 2.  Get staff by Id */
 CREATE PROCEDURE sp_Staff_GetById 
@@ -72,7 +72,7 @@ BEGIN
 	SET NOCOUNT ON;
 	SELECT * FROM dbo.Staff WHERE Id=@Id;
 END;
-GO;
+GO
 
 /* 3. Create staff */
 CREATE PROCEDURE sp_Staff_Insert
@@ -83,7 +83,7 @@ BEGIN
 	INSERT INTO dbo.Staff (Name)
 	VALUES (@StaffName)
 END;
-GO;
+GO
 
 /* 4. Update staff */
 CREATE PROCEDURE sp_Staff_Update 
@@ -98,7 +98,7 @@ BEGIN
 	SET Name=@NewStaffName
 	WHERE Id=@Id
 END;
-GO;
+GO
 
 /* 5. Delete staff */
 CREATE PROCEDURE sp_Staff_Delete 
@@ -108,7 +108,7 @@ BEGIN
 	SET NOCOUNT ON;
 	DELETE FROM dbo.Staff WHERE Id=@Id
 END;
-GO;
+GO
 
 /* ==================== ASSET ==============================*/
 /* 1. Get all assets */
@@ -118,7 +118,7 @@ BEGIN
 	SET NOCOUNT ON;
 	SELECT * FROM dbo.Asset;
 END;
-GO;
+GO
 
 /* 2. Get asset by Id */
 CREATE PROCEDURE sp_Asset_GetById 
@@ -128,7 +128,7 @@ BEGIN
 	SET NOCOUNT ON;
 	SELECT * FROM dbo.Asset WHERE Id=@Id;
 END;
-GO;
+GO
 
 /* 3. Create asset */
 CREATE PROCEDURE sp_Asset_Insert
@@ -143,7 +143,7 @@ BEGIN
 	INSERT INTO dbo.Asset (Name, CategoryId, Status)
 	VALUES (@StaffName, @CategoryId, @Status)
 END;
-GO;
+GO
 
 /* 4. Update asset */
 CREATE PROCEDURE sp_Asset_Update 
@@ -158,7 +158,7 @@ BEGIN
 	SET Name=@NewName
 	WHERE Id=@Id
 END;
-GO;
+GO
 
 /* 5. Delete asset */
 CREATE PROCEDURE sp_Asset_Delete 

@@ -13,7 +13,7 @@ BEGIN
 	SET AssignedToStaffId = @ExistingStaffId
 	WHERE Id=@AssetId
 END
-GO;
+GO
 
 /* Unassign asset from staff */
 CREATE PROCEDURE sp_Asset_UnassignFromStaff
@@ -28,7 +28,7 @@ BEGIN
 	SET AssignedToStaffId = NULL
 	WHERE Id=@AssetId
 END
-GO;
+GO
 
 /* Mark asset as available */
 CREATE PROCEDURE sp_Asset_MarkAsAvailable
@@ -40,7 +40,7 @@ BEGIN
 	SET Status = 'Available'
 	WHERE Id=@AssetId
 END
-GO;
+GO
 
 /* Mark asset as assigned */
 CREATE PROCEDURE sp_Asset_MarkAsAssigned
@@ -52,7 +52,7 @@ BEGIN
 	SET Status = 'Assigned'
 	WHERE Id=@AssetId
 END
-GO;
+GO
 
 /* Mark asset as damaged */
 CREATE PROCEDURE sp_Asset_MarkAsDamaged
@@ -64,4 +64,4 @@ BEGIN
 	SET Status = 'Damaged'
 	WHERE Id=@AssetId
 END
-GO;
+GO
