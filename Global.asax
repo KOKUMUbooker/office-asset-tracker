@@ -8,7 +8,6 @@
     {
         // Code that runs on application startup
         BundleConfig.RegisterBundles(BundleTable.Bundles);
-        AuthConfig.RegisterOpenAuth();
     }
     
     void Application_End(object sender, EventArgs e)
