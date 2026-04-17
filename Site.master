@@ -38,14 +38,21 @@
         <div class="content-wrapper">
             <div class="float-left">
                 <p class="site-title">
-                    <a runat="server" href="~/">your logo here</a></p>
+                   <asp:Image 
+                    ID="imgLogo" 
+                    runat="server" 
+                    ImageUrl="~/Images/OAT-logo.jpg" 
+                    AlternateText="Logo"
+                    Width="40px" />
             </div>
             <div class="float-right">
                 <nav>
                     <ul id="menu">
                         <li><a runat="server" href="~/">Home</a></li>
-                        <li><a runat="server" href="~/About.aspx">About</a></li>
-                        <li><a runat="server" href="~/Contact.aspx">Contact</a></li>
+                        <li><a runat="server" href="~/Pages/Assets.aspx">Assets</a></li>
+                        <li><a runat="server" href="~/Pages/Categories.aspx">Categories</a></li>
+                        <li><a runat="server" href="~/Pages/Staff.aspx">Staff</a></li>
+                        <li><a runat="server" href="~/Pages/Reports.aspx">Reports</a></li>
                     </ul>
                 </nav>
             </div>
@@ -53,7 +60,7 @@
     </header>
     <div id="body">
         <asp:ContentPlaceHolder runat="server" ID="FeaturedContent" />
-        <section class="content-wrapper main-content clear-fix">
+        <section>
             <asp:ContentPlaceHolder runat="server" ID="MainContent" />
         </section>
     </div>
@@ -61,7 +68,7 @@
         <div class="content-wrapper">
             <div class="float-left">
                 <p>
-                    &copy; <%: DateTime.Now.Year %> - My ASP.NET Application
+                    &copy; <%: DateTime.Now.Year %> - Office Asset Tracker
                 </p>
             </div>
         </div>
