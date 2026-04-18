@@ -36,18 +36,16 @@
     </asp:ScriptManager>
     <header>
         <div class="content-wrapper">
-            <div class="float-left">
-                <p class="site-title">
-                   <asp:Image 
-                    ID="imgLogo" 
-                    runat="server" 
-                    ImageUrl="~/Images/OAT-logo.jpg" 
-                    AlternateText="Logo"
-                    Width="40px" />
-            </div>
-            <div class="float-right">
+           
+            <div>
                 <nav>
                     <ul id="menu">
+                        <asp:Image 
+                            ID="imgLogo" 
+                            runat="server" 
+                            ImageUrl="~/Images/OAT-logo.jpg" 
+                            AlternateText="Logo"
+                            Width="40px" />
                         <li><a runat="server" href="~/">Assets</a></li>
                         <li><a runat="server" href="~/Pages/Categories.aspx">Categories</a></li>
                         <li><a runat="server" href="~/Pages/Staff.aspx">Staff</a></li>
@@ -64,13 +62,11 @@
         </section>
     </div>
     <footer>
-        <div class="content-wrapper">
             <div class="float-left">
                 <p>
                     &copy; <%: DateTime.Now.Year %> - Office Asset Tracker
                 </p>
             </div>
-        </div>
     </footer>
     </form>
 </body>
