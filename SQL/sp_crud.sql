@@ -26,6 +26,8 @@ BEGIN
 	SET NOCOUNT ON;
 	INSERT INTO dbo.Category (Name)
 	VALUES (@CategoryName)
+
+	SELECT SCOPE_IDENTITY() /* Return ID of created item */
 END;
 GO
 
@@ -82,6 +84,8 @@ BEGIN
 	SET NOCOUNT ON;
 	INSERT INTO dbo.Staff (Name)
 	VALUES (@StaffName)
+
+	SELECT SCOPE_IDENTITY() /* Return ID of created item */
 END;
 GO
 
@@ -142,6 +146,8 @@ BEGIN
 	SET NOCOUNT ON;
 	INSERT INTO dbo.Asset (Name, CategoryId, Status)
 	VALUES (@Name, @CategoryId, @Status)
+
+	SELECT SCOPE_IDENTITY() /* Return ID of created item */
 END;
 GO
 
