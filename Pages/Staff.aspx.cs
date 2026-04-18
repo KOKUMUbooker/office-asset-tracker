@@ -19,9 +19,9 @@ public partial class Staff : System.Web.UI.Page
     {
         if (!IsPostBack)
         {
-            var categories = _repo.GetStaffMembers();
+            var staff = _repo.GetStaffMembers();
 
-            gvStaff.DataSource = categories;
+            gvStaff.DataSource = staff;
             gvStaff.DataBind();
         }
     }

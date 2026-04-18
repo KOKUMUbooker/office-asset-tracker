@@ -18,7 +18,7 @@ namespace office_asset_tracker.DAL
             var staff = new List<Staff>();
 
             using (SqlConnection conn = new SqlConnection(ConnString))
-            using (SqlCommand cmd = new SqlCommand("sp_Category_GetAll", conn))
+            using (SqlCommand cmd = new SqlCommand("sp_Staff_GetAll", conn))
             {
                 cmd.CommandType = CommandType.StoredProcedure;
 
