@@ -11,10 +11,12 @@ using office_asset_tracker.Models;
 public partial class Pages_Forms_AssetForm : System.Web.UI.Page
 {
     private CategoryRepository _categoryRepo;
+    private AssetRepository _assetRepo;
 
     public Pages_Forms_AssetForm()
     {
         _categoryRepo = new CategoryRepository();
+        _assetRepo = new AssetRepository();
     }
 
     protected void Page_Load(object sender, EventArgs e)
@@ -28,7 +30,15 @@ public partial class Pages_Forms_AssetForm : System.Web.UI.Page
 
     protected void BtnSubmit_Click(object sender, EventArgs e)
     {
-       
+        var newAsset = new AssetCreateDto
+        {
+            Name = AssetName.Text,
+            CategoryId = int.Parse(AssetCategory.SelectedValue),
+            Status = AssetStatus.SelectedValue
+        };
+
+        _assetRepo.CreateAsset(newAsset);
+        Response.Redirect("/");
     }
 
     private void BindValuesToCategoryDropdown() 

@@ -54,5 +54,22 @@ namespace office_asset_tracker.DAL
 
             return assets;
         }
+
+        public int CreateAsset(AssetCreateDto createDto)
+        {
+             using (SqlConnection conn = new SqlConnection(ConnString))
+             using (SqlCommand cmd = new SqlCommand("sp_Asset_Insert", conn))
+             {
+                 cmd.CommandType = CommandType.StoredProcedure;
+
+                 cmd.Parameters.AddWithValue("@Name", createDto.Name);
+                 cmd.Parameters.AddWithValue("@CategoryId", createDto.CategoryId);
+                 cmd.Parameters.AddWithValue("@Status", createDto.Status);
+
+                 conn.Open();
+                 // cmd.ExecuteNonQuery();
+                 return Convert.ToInt32(cmd.ExecuteScalar());
+             }
+        }
     }
 }
