@@ -25,4 +25,9 @@ public partial class Categories : Page
             gvCategories.DataBind();
         }
     }
+
+    protected void BtnAdd_Click(object sender, EventArgs e)
+    {
+        Response.Redirect("Forms/CategoriesForm.aspx");
+    }
 }

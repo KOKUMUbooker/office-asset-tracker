@@ -25,4 +25,9 @@ public partial class _Default : Page
             gvAssets.DataBind();
         }
     }
+
+    protected void BtnAdd_Click(object sender, EventArgs e)
+    {
+        Response.Redirect("Pages/Forms/AssetForm.aspx");
+    }
 }

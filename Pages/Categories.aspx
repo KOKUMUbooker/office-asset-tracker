@@ -8,5 +8,6 @@
                 <asp:BoundField DataField="Name" HeaderText="Category Name" />
             </Columns>
         </asp:GridView>
+        <asp:Button ID="AddNewStaffBtn" runat="server" Text="Add new category" CssClass="btn btn-contained" OnClick="BtnAdd_Click"/>    
     </div>
 </asp:Content>

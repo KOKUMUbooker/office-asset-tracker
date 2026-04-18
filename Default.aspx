@@ -11,6 +11,8 @@
                 <asp:BoundField DataField="Status" HeaderText="Status" />
             </Columns>
         </asp:GridView>
+        <asp:Button ID="AddNewAssetBtn" runat="server" Text="Add new asset" CssClass="btn btn-contained" OnClick="BtnAdd_Click"/>    
     </div>
+         
 </asp:Content>
  

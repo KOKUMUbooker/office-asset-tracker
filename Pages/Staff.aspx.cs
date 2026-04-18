@@ -25,4 +25,9 @@ public partial class Staff : System.Web.UI.Page
             gvStaff.DataBind();
         }
     }
+
+    protected void BtnAdd_Click(object sender, EventArgs e)
+    {
+        Response.Redirect("Forms/StaffForm.aspx");
+    }
 }
