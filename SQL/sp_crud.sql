@@ -141,7 +141,7 @@ AS
 BEGIN
 	SET NOCOUNT ON;
 	INSERT INTO dbo.Asset (Name, CategoryId, Status)
-	VALUES (@StaffName, @CategoryId, @Status)
+	VALUES (@Name, @CategoryId, @Status)
 END;
 GO
 
