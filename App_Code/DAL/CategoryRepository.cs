@@ -39,6 +39,31 @@ namespace office_asset_tracker.DAL
             return categories;
         }
 
+        public Category GetCategoryById(int categoryId)
+        {
+            using (SqlConnection conn = new SqlConnection(ConnString))
+            using (SqlCommand cmd = new SqlCommand("sp_Category_GetById", conn))
+            {
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@Id", categoryId);
+
+                conn.Open();
+                using (SqlDataReader reader = cmd.ExecuteReader())
+                {
+                    if (reader.Read()) // only one row expected
+                    {
+                        return new Category
+                        {
+                            Id = (int)reader["Id"],
+                            Name = reader["Name"].ToString(),
+                        };
+                    }
+                }
+            }
+
+            return null;
+        }
+
         public int CreateCategory(CreateCategoryDto createDto)
         {
             using (SqlConnection conn = new SqlConnection(ConnString))
@@ -51,6 +76,21 @@ namespace office_asset_tracker.DAL
                 conn.Open();
                 // cmd.ExecuteNonQuery();
                 return Convert.ToInt32(cmd.ExecuteScalar());
+            }
+        }
+
+        public void UpdateCategory(int categoryId, CreateCategoryDto dto)
+        {
+            using (SqlConnection conn = new SqlConnection(ConnString))
+            using (SqlCommand cmd = new SqlCommand("sp_Category_Update", conn))
+            {
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                cmd.Parameters.AddWithValue("@Id", categoryId);
+                cmd.Parameters.AddWithValue("@NewCategoryName", dto.Name);
+
+                conn.Open();
+                cmd.ExecuteNonQuery();
             }
         }
 
