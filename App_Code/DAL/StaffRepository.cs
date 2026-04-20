@@ -39,6 +39,31 @@ namespace office_asset_tracker.DAL
             return staff;
         }
 
+        public Staff GetStaffById(int staffId)
+        {
+            using (SqlConnection conn = new SqlConnection(ConnString))
+            using (SqlCommand cmd = new SqlCommand("sp_Staff_GetById", conn))
+            {
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@Id", staffId);
+
+                conn.Open();
+                using (SqlDataReader reader = cmd.ExecuteReader())
+                {
+                    if (reader.Read()) // only one row expected
+                    {
+                        return new Staff
+                        {
+                            Id = (int)reader["Id"],
+                            Name = reader["Name"].ToString(),
+                        };
+                    }
+                }
+            }
+
+            return null;
+        }
+
         public int CreateStaff(CreateStaffDto createDto)
         {
             using (SqlConnection conn = new SqlConnection(ConnString))
@@ -51,6 +76,21 @@ namespace office_asset_tracker.DAL
                 conn.Open();
                 // cmd.ExecuteNonQuery();
                 return Convert.ToInt32(cmd.ExecuteScalar());
+            }
+        }
+
+        public void UpdateStaff(int staffId, CreateStaffDto createDto)
+        {
+            using (SqlConnection conn = new SqlConnection(ConnString))
+            using (SqlCommand cmd = new SqlCommand("sp_Staff_Update", conn))
+            {
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                cmd.Parameters.AddWithValue("@Id", staffId);
+                cmd.Parameters.AddWithValue("@NewStaffName", createDto.Name);
+
+                conn.Open();
+                cmd.ExecuteNonQuery();
             }
         }
 

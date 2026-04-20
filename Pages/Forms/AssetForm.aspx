@@ -3,7 +3,7 @@ AutoEventWireup="true" CodeFile="AssetForm.aspx.cs"
 Inherits="Pages_Forms_AssetForm" %>
 
 <asp:Content runat="server" ID="BodyContent" ContentPlaceHolderID="MainContent">
-  <h1 id="formTitle"   runat="server">Add new asset</h1>
+  <h1 id="formTitle" runat="server">Add new asset</h1>
   <asp:Label ID="AssetNameLabel" runat="server" Text="Enter Asset Name: " />
   <asp:TextBox ID="AssetName" runat="server" />
   <br /><br />

@@ -1,7 +1,7 @@
 ﻿<%@ Page Title="Staff Form" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeFile="StaffForm.aspx.cs" Inherits="Pages_Forms_StaffForm" %>
 
 <asp:Content runat="server" ID="BodyContent" ContentPlaceHolderID="MainContent">
-  <h1>Add new staff</h1>
+  <h1 id="formTitle" runat="server">Add new staff</h1>
   <asp:Label ID="StaffNameLabel" runat="server" Text="Enter Staff Name: " />
   <asp:TextBox ID="StaffName" runat="server" />
   <br /><br />
