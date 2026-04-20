@@ -155,13 +155,17 @@ GO
 CREATE PROCEDURE sp_Asset_Update 
 ( 
 	@Id INTEGER, 
-	@NewName NVARCHAR(100)
+	@NewName NVARCHAR(100),
+	@NewCategoryId INTEGER,
+	@NewStatus NVARCHAR(50)
 )
 AS
 BEGIN
 	SET NOCOUNT ON;
 	UPDATE dbo.Asset
-	SET Name=@NewName
+	SET Name=@NewName,
+		CategoryId=@NewCategoryId,
+		Status=@NewStatus
 	WHERE Id=@Id
 END;
 GO
