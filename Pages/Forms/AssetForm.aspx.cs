@@ -34,6 +34,9 @@ public partial class Pages_Forms_AssetForm : System.Web.UI.Page
 
             if (!string.IsNullOrEmpty(idParam))
             {
+                formTitle.InnerText = "Edit Asset";
+                btnSubmit.Text = "Update asset";
+
                 int assetId = int.Parse(idParam);
                 LoadAsset(assetId);
             }
