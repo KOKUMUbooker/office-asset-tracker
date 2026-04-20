@@ -25,6 +25,14 @@ public partial class Pages_Forms_AssetForm : System.Web.UI.Page
         {
             BindValuesToCategoryDropdown();
             BindValuesToStatusDropdown();
+
+            var idParam = Request.QueryString["id"];
+
+            if (!string.IsNullOrEmpty(idParam))
+            {
+                int assetId = int.Parse(idParam);
+                LoadAsset(assetId);
+            }
         }
     }
 
@@ -67,5 +75,21 @@ public partial class Pages_Forms_AssetForm : System.Web.UI.Page
 
         AssetCategory.DataBind();
         AssetStatus.SelectedValue = "Available";
+    }
+
+    private void LoadAsset(int assetId)
+    {
+        var asset = _assetRepo.GetAssetById(assetId);
+
+        if (asset == null)
+        {
+            // Handle not found
+            Response.Redirect("/");
+            return;
+        }
+
+        AssetName.Text = asset.Name;
+        AssetCategory.SelectedValue = asset.CategoryId.ToString();
+        AssetStatus.SelectedValue = asset.Status;
     }
 }

@@ -55,6 +55,38 @@ namespace office_asset_tracker.DAL
             return assets;
         }
 
+        public DBAsset GetAssetById(int assetId)
+        {
+            using (SqlConnection conn = new SqlConnection(ConnString))
+            using (SqlCommand cmd = new SqlCommand("sp_Asset_GetById", conn))
+            {
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@Id", assetId);
+
+                conn.Open();
+
+                using (SqlDataReader reader = cmd.ExecuteReader())
+                {
+                    if (reader.Read()) // only one row expected
+                    {
+                        return new DBAsset
+                        {
+                            Id = Convert.ToInt32(reader["Id"]),
+                            Name = reader["Name"].ToString(),
+                            CategoryId = Convert.ToInt32(reader["CategoryId"]),
+                  
+                            AssignedToStaffId = reader["AssignedToStaffId"] != DBNull.Value
+                                ? Convert.ToInt32(reader["AssignedToStaffId"])
+                                : (int?)null,
+                            Status = reader["Status"].ToString()
+                        };
+                    }
+                }
+            }
+
+            return null; 
+        }
+
         public int CreateAsset(AssetCreateDto createDto)
         {
              using (SqlConnection conn = new SqlConnection(ConnString))
@@ -69,6 +101,23 @@ namespace office_asset_tracker.DAL
                  conn.Open();
                  // cmd.ExecuteNonQuery();
                  return Convert.ToInt32(cmd.ExecuteScalar());
+             }
+        }
+
+        // TODO: Implement this
+        public void UpdateAsset(AssetCreateDto createDto)
+        {
+            using (SqlConnection conn = new SqlConnection(ConnString))
+            using (SqlCommand cmd = new SqlCommand("sp_Asset_Insert", conn))
+            {
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                // cmd.Parameters.AddWithValue("@Name", createDto.Name);
+                // cmd.Parameters.AddWithValue("@CategoryId", createDto.CategoryId);
+                // cmd.Parameters.AddWithValue("@Status", createDto.Status);
+
+                conn.Open();
+                cmd.ExecuteNonQuery();
              }
         }
 
