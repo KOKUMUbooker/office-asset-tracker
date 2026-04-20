@@ -38,5 +38,20 @@ namespace office_asset_tracker.DAL
 
             return staff;
         }
+
+        public int CreateStaff(CreateStaffDto createDto)
+        {
+            using (SqlConnection conn = new SqlConnection(ConnString))
+            using (SqlCommand cmd = new SqlCommand("sp_Staff_Insert", conn))
+            {
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                cmd.Parameters.AddWithValue("@StaffName", createDto.Name);
+
+                conn.Open();
+                // cmd.ExecuteNonQuery();
+                return Convert.ToInt32(cmd.ExecuteScalar());
+            }
+        }
     }
 }
