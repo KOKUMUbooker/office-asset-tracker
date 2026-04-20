@@ -87,7 +87,7 @@ namespace office_asset_tracker.DAL
             return null; 
         }
 
-        public int CreateAsset(AssetCreateDto createDto)
+        public int CreateAsset(DBAsset createDto)
         {
              using (SqlConnection conn = new SqlConnection(ConnString))
              using (SqlCommand cmd = new SqlCommand("sp_Asset_Insert", conn))
@@ -97,6 +97,7 @@ namespace office_asset_tracker.DAL
                  cmd.Parameters.AddWithValue("@Name", createDto.Name);
                  cmd.Parameters.AddWithValue("@CategoryId", createDto.CategoryId);
                  cmd.Parameters.AddWithValue("@Status", createDto.Status);
+                 cmd.Parameters.AddWithValue("@NewAssignedToStaffId", createDto.AssignedToStaffId);
 
                  conn.Open();
                  // cmd.ExecuteNonQuery();
@@ -104,17 +105,18 @@ namespace office_asset_tracker.DAL
              }
         }
 
-        // TODO: Implement this
-        public void UpdateAsset(AssetCreateDto createDto)
+        public void UpdateAsset(DBAsset updateDto)
         {
             using (SqlConnection conn = new SqlConnection(ConnString))
-            using (SqlCommand cmd = new SqlCommand("sp_Asset_Insert", conn))
+            using (SqlCommand cmd = new SqlCommand("sp_Asset_Update", conn))
             {
                 cmd.CommandType = CommandType.StoredProcedure;
 
-                // cmd.Parameters.AddWithValue("@Name", createDto.Name);
-                // cmd.Parameters.AddWithValue("@CategoryId", createDto.CategoryId);
-                // cmd.Parameters.AddWithValue("@Status", createDto.Status);
+                cmd.Parameters.AddWithValue("@Id", updateDto.Id);
+                cmd.Parameters.AddWithValue("@NewName", updateDto.Name);
+                cmd.Parameters.AddWithValue("@NewCategoryId", updateDto.CategoryId);
+                cmd.Parameters.AddWithValue("@NewStatus", updateDto.Status);
+                cmd.Parameters.AddWithValue("@NewAssignedToStaffId", updateDto.AssignedToStaffId);
 
                 conn.Open();
                 cmd.ExecuteNonQuery();

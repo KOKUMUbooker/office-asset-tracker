@@ -12,11 +12,13 @@ public partial class Pages_Forms_AssetForm : System.Web.UI.Page
 {
     private CategoryRepository _categoryRepo;
     private AssetRepository _assetRepo;
+    private StaffRepository _staffRepo;
 
     public Pages_Forms_AssetForm()
     {
         _categoryRepo = new CategoryRepository();
         _assetRepo = new AssetRepository();
+        _staffRepo = new StaffRepository();
     }
 
     protected void Page_Load(object sender, EventArgs e)
@@ -25,6 +27,8 @@ public partial class Pages_Forms_AssetForm : System.Web.UI.Page
         {
             BindValuesToCategoryDropdown();
             BindValuesToStatusDropdown();
+            BindValuesToAssignToStaffDropdown();
+            BindValuesToAssignToStaffDropdown();
 
             var idParam = Request.QueryString["id"];
 
@@ -38,14 +42,33 @@ public partial class Pages_Forms_AssetForm : System.Web.UI.Page
 
     protected void BtnSubmit_Click(object sender, EventArgs e)
     {
-        var newAsset = new AssetCreateDto
+        var dto = new DBAsset
         {
             Name = AssetName.Text,
             CategoryId = int.Parse(AssetCategory.SelectedValue),
             Status = AssetStatus.SelectedValue
         };
 
-        _assetRepo.CreateAsset(newAsset);
+        if (AssignedToStaff.SelectedValue != "0")
+        {
+            dto.AssignedToStaffId = int.Parse(AssignedToStaff.SelectedValue);
+        }
+
+        var idParam = Request.QueryString["id"];
+
+        if (string.IsNullOrEmpty(idParam))
+        {
+            // CREATE
+            _assetRepo.CreateAsset(dto);
+        }
+        else
+        {
+            // UPDATE
+            int assetId = int.Parse(idParam);
+            dto.Id = assetId;
+            _assetRepo.UpdateAsset(dto);
+        }
+
         Response.Redirect("/");
     }
 
@@ -77,6 +100,18 @@ public partial class Pages_Forms_AssetForm : System.Web.UI.Page
         AssetStatus.SelectedValue = "Available";
     }
 
+    private void BindValuesToAssignToStaffDropdown()
+    {
+        var staff = _staffRepo.GetStaffMembers();
+
+        AssignedToStaff.DataSource = staff;
+        AssignedToStaff.DataTextField = "Name"; // what user sees
+        AssignedToStaff.DataValueField = "Id";  // actual value
+
+        AssignedToStaff.DataBind();
+        AssignedToStaff.Items.Insert(0, new ListItem("-- Select Assignee --", ""));
+    }
+
     private void LoadAsset(int assetId)
     {
         var asset = _assetRepo.GetAssetById(assetId);
@@ -91,5 +126,6 @@ public partial class Pages_Forms_AssetForm : System.Web.UI.Page
         AssetName.Text = asset.Name;
         AssetCategory.SelectedValue = asset.CategoryId.ToString();
         AssetStatus.SelectedValue = asset.Status;
+        AssignedToStaff.SelectedValue = asset.AssignedToStaffId != null ? asset.AssignedToStaffId.ToString() : "0";
     }
 }
