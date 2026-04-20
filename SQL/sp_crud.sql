@@ -139,13 +139,22 @@ CREATE PROCEDURE sp_Asset_Insert
 (
  @Name NVARCHAR(100),
  @CategoryId INTEGER,
- @Status NVARCHAR(50)
+ @Status NVARCHAR(50),
+ @NewAssignedToStaffId INT = NULL
 )
 AS
 BEGIN
 	SET NOCOUNT ON;
-	INSERT INTO dbo.Asset (Name, CategoryId, Status)
-	VALUES (@Name, @CategoryId, @Status)
+	INSERT INTO dbo.Asset (Name, CategoryId, Status, AssignedToStaffId)
+	VALUES (
+		@Name,
+		@CategoryId, 
+		@Status, 
+		CASE 
+			WHEN @Status = 'Assigned' THEN @NewAssignedToStaffId
+			ELSE NULL
+    	END
+	)
 
 	SELECT SCOPE_IDENTITY() /* Return ID of created item */
 END;
@@ -154,19 +163,26 @@ GO
 /* 4. Update asset */
 CREATE PROCEDURE sp_Asset_Update 
 ( 
-	@Id INTEGER, 
-	@NewName NVARCHAR(100),
-	@NewCategoryId INTEGER,
-	@NewStatus NVARCHAR(50)
+    @Id INT, 
+    @NewName NVARCHAR(100),
+    @NewCategoryId INT,
+    @NewStatus NVARCHAR(50),
+    @NewAssignedToStaffId INT = NULL
 )
 AS
 BEGIN
-	SET NOCOUNT ON;
-	UPDATE dbo.Asset
-	SET Name=@NewName,
-		CategoryId=@NewCategoryId,
-		Status=@NewStatus
-	WHERE Id=@Id
+    SET NOCOUNT ON;
+
+    UPDATE dbo.Asset
+    SET Name = @NewName,
+        CategoryId = @NewCategoryId,
+        Status = @NewStatus,
+        AssignedToStaffId = 
+            CASE 
+                WHEN @NewStatus = 'Assigned' THEN @NewAssignedToStaffId
+                ELSE NULL
+            END
+    WHERE Id = @Id;
 END;
 GO
 
