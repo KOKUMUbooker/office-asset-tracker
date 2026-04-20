@@ -53,5 +53,19 @@ namespace office_asset_tracker.DAL
                 return Convert.ToInt32(cmd.ExecuteScalar());
             }
         }
+
+        public void DeleteCategory(int categoryId)
+        {
+            using (SqlConnection conn = new SqlConnection(ConnString))
+            using (SqlCommand cmd = new SqlCommand("sp_Category_Delete", conn))
+            {
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                cmd.Parameters.AddWithValue("@Id", categoryId);
+
+                conn.Open();
+                cmd.ExecuteNonQuery();
+            }
+        }
     }
 }

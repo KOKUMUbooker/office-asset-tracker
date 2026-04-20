@@ -53,5 +53,19 @@ namespace office_asset_tracker.DAL
                 return Convert.ToInt32(cmd.ExecuteScalar());
             }
         }
+
+        public void DeleteStaff(int staffId)
+        {
+            using (SqlConnection conn = new SqlConnection(ConnString))
+            using (SqlCommand cmd = new SqlCommand("sp_Staff_Delete", conn))
+            {
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                cmd.Parameters.AddWithValue("@Id", staffId);
+
+                conn.Open();
+                cmd.ExecuteNonQuery();
+            }
+        }
     }
 }
