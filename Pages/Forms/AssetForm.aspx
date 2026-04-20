@@ -26,6 +26,7 @@ Inherits="Pages_Forms_AssetForm" %>
    </asp:DropDownList>
     <br /><br />
 
+   <asp:Button ID="backBtn" runat="server" Text="Back" OnClick="BackBtn_Click" CssClass="btn btn-outlined"/>
    <asp:Button ID="btnSubmit" runat="server" Text="Submit" OnClick="BtnSubmit_Click" CssClass="btn btn-contained"/>
    <br /><br />
 </asp:Content>

@@ -41,6 +41,11 @@ public partial class Pages_Forms_AssetForm : System.Web.UI.Page
         Response.Redirect("/");
     }
 
+    protected void BackBtn_Click(object sender, EventArgs e)
+    {
+        Response.Redirect("/");
+    }
+
     private void BindValuesToCategoryDropdown() 
     {
         var categories = _categoryRepo.GetCategories();
