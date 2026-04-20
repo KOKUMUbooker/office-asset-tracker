@@ -19,15 +19,38 @@ public partial class Staff : System.Web.UI.Page
     {
         if (!IsPostBack)
         {
-            var staff = _repo.GetStaffMembers();
+            LoadStaff();
+        }
+    }
 
-            gvStaff.DataSource = staff;
-            gvStaff.DataBind();
+    protected void gvStaff_RowCommand(object sender, GridViewCommandEventArgs e)
+    {
+        int staffId = Convert.ToInt32(e.CommandArgument);
+
+        if (e.CommandName == "EditStaff")
+        {
+            Response.Redirect("~/Pages/Forms/StaffForm.aspx?id=" + staffId);
+        }
+
+        if (e.CommandName == "DeleteStaff")
+        {
+            _repo.DeleteStaff(staffId);
+
+            // reload data
+            LoadStaff();
         }
     }
 
     protected void BtnAdd_Click(object sender, EventArgs e)
     {
         Response.Redirect("Forms/StaffForm.aspx");
+    }
+
+    private void LoadStaff() 
+    {
+        var staff = _repo.GetStaffMembers();
+
+        gvStaff.DataSource = staff;
+        gvStaff.DataBind();
     }
 }

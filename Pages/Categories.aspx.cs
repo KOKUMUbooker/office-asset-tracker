@@ -19,15 +19,37 @@ public partial class Categories : Page
     {
         if (!IsPostBack)
         {
-            var categories = _repo.GetCategories();
+            LoadCategories();
+        }
+    }
 
-            gvCategories.DataSource = categories;
-            gvCategories.DataBind();
+    protected void gvCategories_RowCommand(object sender, GridViewCommandEventArgs e)
+    {
+        int categoryId = Convert.ToInt32(e.CommandArgument);
+
+        if (e.CommandName == "EditCategory")
+        {
+            Response.Redirect("~/Pages/Forms/CategoriesForm.aspx?id=" + categoryId);
+        }
+
+        if (e.CommandName == "DeleteCategory")
+        {
+            _repo.DeleteCategory(categoryId);
+
+            // reload data
+            LoadCategories();
         }
     }
 
     protected void BtnAdd_Click(object sender, EventArgs e)
     {
         Response.Redirect("Forms/CategoriesForm.aspx");
+    }
+
+    private void LoadCategories() {
+        var categories = _repo.GetCategories();
+
+        gvCategories.DataSource = categories;
+        gvCategories.DataBind();
     }
 }
