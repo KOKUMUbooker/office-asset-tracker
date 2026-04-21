@@ -1,6 +1,9 @@
 /* ==================== CATEGORIES ==============================*/
 /* 1. Get all categories */
-CREATE PROCEDURE sp_Category_GetAll
+IF OBJECT_ID('dbo.sp_Category_GetAll', 'P') IS NOT NULL
+    DROP PROCEDURE dbo.sp_Category_GetAll;
+GO
+CREATE PROCEDURE dbo.sp_Category_GetAll
 AS
 BEGIN
 	SET NOCOUNT ON;
@@ -9,7 +12,10 @@ END;
 GO
 
 /*2.  Get category by Id */
-CREATE PROCEDURE sp_Category_GetById 
+IF OBJECT_ID('dbo.sp_Category_GetById', 'P') IS NOT NULL
+    DROP PROCEDURE dbo.sp_Category_GetById;
+GO
+CREATE PROCEDURE dbo.sp_Category_GetById 
 ( @Id INT)
 AS
 BEGIN
@@ -19,7 +25,10 @@ END;
 GO
 
 /* 3. Create category */
-CREATE PROCEDURE sp_Category_Insert
+IF OBJECT_ID('dbo.sp_Category_Insert', 'P') IS NOT NULL
+    DROP PROCEDURE dbo.sp_Category_Insert;
+GO
+CREATE PROCEDURE dbo.sp_Category_Insert
 ( @CategoryName NVARCHAR(100) )
 AS
 BEGIN
@@ -32,7 +41,10 @@ END;
 GO
 
 /* 4. Update category */
-CREATE PROCEDURE sp_Category_Update 
+IF OBJECT_ID('dbo.sp_Category_Update', 'P') IS NOT NULL
+    DROP PROCEDURE dbo.sp_Category_Update;
+GO
+CREATE PROCEDURE dbo.sp_Category_Update 
 ( 
 	@Id INTEGER, 
 	@NewCategoryName NVARCHAR(100)
@@ -47,7 +59,10 @@ END;
 GO
 
 /* 5. Delete category */
-CREATE PROCEDURE sp_Category_Delete 
+IF OBJECT_ID('dbo.sp_Category_Delete', 'P') IS NOT NULL
+    DROP PROCEDURE dbo.sp_Category_Delete;
+GO
+CREATE PROCEDURE dbo.sp_Category_Delete 
 ( @Id INTEGER )
 AS
 BEGIN
@@ -58,7 +73,10 @@ GO
 
 /* ==================== STAFF ==============================*/
 /* 1. Get all staff members */
-CREATE PROCEDURE sp_Staff_GetAll
+IF OBJECT_ID('dbo.sp_Staff_GetAll', 'P') IS NOT NULL
+    DROP PROCEDURE dbo.sp_Staff_GetAll;
+GO
+CREATE PROCEDURE dbo.sp_Staff_GetAll
 AS
 BEGIN
 	SET NOCOUNT ON;
@@ -67,7 +85,10 @@ END;
 GO
 
 /* 2.  Get staff by Id */
-CREATE PROCEDURE sp_Staff_GetById 
+IF OBJECT_ID('dbo.sp_Staff_GetById', 'P') IS NOT NULL
+    DROP PROCEDURE dbo.sp_Staff_GetById;
+GO
+CREATE PROCEDURE dbo.sp_Staff_GetById 
 ( @Id INT)
 AS
 BEGIN
@@ -77,7 +98,10 @@ END;
 GO
 
 /* 3. Create staff */
-CREATE PROCEDURE sp_Staff_Insert
+IF OBJECT_ID('dbo.sp_Staff_Insert', 'P') IS NOT NULL
+    DROP PROCEDURE dbo.sp_Staff_Insert;
+GO
+CREATE PROCEDURE dbo.sp_Staff_Insert
 ( @StaffName NVARCHAR(100) )
 AS
 BEGIN
@@ -90,8 +114,11 @@ END;
 GO
 
 /* 4. Update staff */
-CREATE PROCEDURE sp_Staff_Update 
-( 
+IF OBJECT_ID('dbo.sp_Staff_Update', 'P') IS NOT NULL
+    DROP PROCEDURE dbo.sp_Staff_Update;
+GO
+CREATE PROCEDURE dbo.sp_Staff_Update 
+(
 	@Id INTEGER, 
 	@NewStaffName NVARCHAR(100)
 )
@@ -105,7 +132,10 @@ END;
 GO
 
 /* 5. Delete staff */
-CREATE PROCEDURE sp_Staff_Delete 
+IF OBJECT_ID('dbo.sp_Staff_Delete', 'P') IS NOT NULL
+    DROP PROCEDURE dbo.sp_Staff_Delete;
+GO
+CREATE PROCEDURE dbo.sp_Staff_Delete 
 ( @Id INTEGER )
 AS
 BEGIN
@@ -116,7 +146,10 @@ GO
 
 /* ==================== ASSET ==============================*/
 /* 1. Get all assets */
-CREATE PROCEDURE sp_Asset_GetAll
+IF OBJECT_ID('dbo.sp_Asset_GetAll', 'P') IS NOT NULL
+    DROP PROCEDURE dbo.sp_Asset_GetAll;
+GO
+CREATE PROCEDURE dbo.sp_Asset_GetAll
 AS
 BEGIN
 	SET NOCOUNT ON;
@@ -125,7 +158,10 @@ END;
 GO
 
 /* 2. Get asset by Id */
-CREATE PROCEDURE sp_Asset_GetById 
+IF OBJECT_ID('dbo.sp_Asset_GetById', 'P') IS NOT NULL
+    DROP PROCEDURE dbo.sp_Asset_GetById;
+GO
+CREATE PROCEDURE dbo.sp_Asset_GetById 
 ( @Id INT)
 AS
 BEGIN
@@ -135,7 +171,10 @@ END;
 GO
 
 /* 3. Create asset */
-CREATE PROCEDURE sp_Asset_Insert
+IF OBJECT_ID('dbo.sp_Asset_Insert', 'P') IS NOT NULL
+    DROP PROCEDURE dbo.sp_Asset_Insert;
+GO
+CREATE PROCEDURE dbo.sp_Asset_Insert
 (
  @Name NVARCHAR(100),
  @CategoryId INTEGER,
@@ -161,7 +200,10 @@ END;
 GO
 
 /* 4. Update asset */
-CREATE PROCEDURE sp_Asset_Update 
+IF OBJECT_ID('dbo.sp_Asset_Update', 'P') IS NOT NULL
+    DROP PROCEDURE dbo.sp_Asset_Update;
+GO
+CREATE PROCEDURE dbo.sp_Asset_Update 
 ( 
     @Id INT, 
     @NewName NVARCHAR(100),
@@ -187,7 +229,10 @@ END;
 GO
 
 /* 5. Delete asset */
-CREATE PROCEDURE sp_Asset_Delete 
+IF OBJECT_ID('dbo.sp_Asset_Delete', 'P') IS NOT NULL
+    DROP PROCEDURE dbo.sp_Asset_Delete;
+GO
+CREATE PROCEDURE dbo.sp_Asset_Delete 
 ( @Id INTEGER )
 AS
 BEGIN

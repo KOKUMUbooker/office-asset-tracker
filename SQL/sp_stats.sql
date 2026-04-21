@@ -1,5 +1,8 @@
 /* Get asset counts based on status */
-CREATE PROCEDURE sp_Asset_CountByStatus
+IF OBJECT_ID('dbo.sp_Asset_CountByStatus', 'P') IS NOT NULL
+    DROP PROCEDURE dbo.sp_Asset_CountByStatus;
+GO
+CREATE PROCEDURE dbo.sp_Asset_CountByStatus
 AS
 BEGIN
 	SELECT Status, COUNT(Id) AS Count
@@ -9,7 +12,10 @@ END
 GO
 
 /* Get asset counts based on category */
-CREATE PROCEDURE sp_Asset_CountByCategory
+IF OBJECT_ID('dbo.sp_Asset_CountByCategory', 'P') IS NOT NULL
+    DROP PROCEDURE dbo.sp_Asset_CountByCategory;
+GO
+CREATE PROCEDURE dbo.sp_Asset_CountByCategory
 AS
 BEGIN
 	SELECT c.Name as Category, COUNT(a.Id) AS Count
@@ -21,7 +27,10 @@ END
 GO
 
 /* Get assets stats totalCount,AvailableCount,AssignedCount and DamagedCount */
-CREATE PROCEDURE sp_Asset_ReportOverview
+IF OBJECT_ID('dbo.sp_Asset_ReportOverview', 'P') IS NOT NULL
+    DROP PROCEDURE dbo.sp_Asset_ReportOverview;
+GO
+CREATE PROCEDURE dbo.sp_Asset_ReportOverview
 AS
 BEGIN
 	SELECT 

@@ -1,5 +1,8 @@
 /* Get assets by category id */
-CREATE PROCEDURE sp_Asset_GetByCategory
+IF OBJECT_ID('dbo.sp_Asset_GetByCategory', 'P') IS NOT NULL
+    DROP PROCEDURE dbo.sp_Asset_GetByCategory;
+GO
+CREATE PROCEDURE dbo.sp_Asset_GetByCategory
 ( @CategoryId INT )
 AS
 BEGIN
@@ -10,7 +13,10 @@ END
 GO
 
 /* Get assets by status */
-CREATE PROCEDURE sp_Asset_GetByStatus
+IF OBJECT_ID('dbo.sp_Asset_GetByStatus', 'P') IS NOT NULL
+    DROP PROCEDURE dbo.sp_Asset_GetByStatus;
+GO
+CREATE PROCEDURE dbo.sp_Asset_GetByStatus
 ( @Status NVARCHAR(50) )
 AS
 BEGIN
@@ -21,7 +27,10 @@ END
 GO
 
 /* Get assets by name */
-CREATE PROCEDURE sp_Asset_SearchByName
+IF OBJECT_ID('dbo.sp_Asset_SearchByName', 'P') IS NOT NULL
+    DROP PROCEDURE dbo.sp_Asset_SearchByName;
+GO
+CREATE PROCEDURE dbo.sp_Asset_SearchByName
 ( @Name NVARCHAR(50) )
 AS
 BEGIN
@@ -32,7 +41,10 @@ END
 GO
 
 /* Get assets by a combination of CategoryId, AssignedToStaffId and Status */
-CREATE PROCEDURE sp_Asset_Filter
+IF OBJECT_ID('dbo.sp_Asset_Filter', 'P') IS NOT NULL
+    DROP PROCEDURE dbo.sp_Asset_Filter;
+GO
+CREATE PROCEDURE dbo.sp_Asset_Filter
 (
  @CategoryId INT = NULL,
  @AssignedToStaffId INT = NULL,

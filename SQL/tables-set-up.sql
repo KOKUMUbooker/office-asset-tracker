@@ -1,28 +1,27 @@
-﻿/* Create DB */
-IF DB_ID('AssetTrackerDB') IS NULL
+﻿/* NOTE: Should be run on  AssetTrackerDB */
+
+/* Create database tables in dbo schema with their relationships & constraints  */
+IF OBJECT_ID('dbo.Category', 'U') IS NULL
 BEGIN
-    CREATE DATABASE AssetTrackerDB;
+    CREATE TABLE dbo.Category (
+        Id INT IDENTITY PRIMARY KEY,
+        Name NVARCHAR(100) NOT NULL
+    );
 END
 GO
 
-/* Switch context to the current DB */
-USE AssetTrackerDB;
-GO
-
-/* Create database tables in dbo schema with their relationships & constraints  */
-CREATE TABLE dbo.[Category] (
+IF OBJECT_ID('dbo.Staff', 'U') IS NULL
+BEGIN
+    CREATE TABLE dbo.[Staff] (
     Id INT IDENTITY PRIMARY KEY,
     Name NVARCHAR(100) NOT NULL
-);
+    );
+END
 GO
 
-CREATE TABLE dbo.[Staff] (
-    Id INT IDENTITY PRIMARY KEY,
-    Name NVARCHAR(100) NOT NULL
-);
-GO
-
-CREATE TABLE dbo.Asset (
+IF OBJECT_ID('dbo.Asset', 'U') IS NULL
+BEGIN
+    CREATE TABLE dbo.Asset (
     Id INT IDENTITY PRIMARY KEY,
     Name NVARCHAR(100) NOT NULL,
     CategoryId INT NOT NULL,
@@ -36,5 +35,6 @@ CREATE TABLE dbo.Asset (
     CONSTRAINT FK_Asset_User
         FOREIGN KEY (AssignedToStaffId)
         REFERENCES dbo.[Staff](Id)
-);
+    );
+END
 GO

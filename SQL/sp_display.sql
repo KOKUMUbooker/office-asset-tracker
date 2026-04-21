@@ -1,5 +1,8 @@
 /* Get all assets including their Category name */
-CREATE PROCEDURE sp_Asset_GetAllWithCategoryAndStaff
+IF OBJECT_ID('dbo.sp_Asset_GetAllWithCategoryAndStaff', 'P') IS NOT NULL
+    DROP PROCEDURE dbo.sp_Asset_GetAllWithCategoryAndStaff;
+GO
+CREATE PROCEDURE dbo.sp_Asset_GetAllWithCategoryAndStaff
 AS
 BEGIN
 	SET NOCOUNT ON;
@@ -20,7 +23,10 @@ END
 GO
 
 /* Get asset details including Category name by their Id */
-CREATE PROCEDURE sp_Asset_GetDetailsById
+IF OBJECT_ID('dbo.sp_Asset_GetDetailsById', 'P') IS NOT NULL
+    DROP PROCEDURE dbo.sp_Asset_GetDetailsById;
+GO
+CREATE PROCEDURE dbo.sp_Asset_GetDetailsById
 ( @Id INT )
 AS
 BEGIN

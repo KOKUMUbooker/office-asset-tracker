@@ -1,6 +1,5 @@
-USE AssetTrackerDB;
+DELETE FROM dbo.Category WHERE Name IN ('IT Equipment', 'Furniture', 'Office Supplies','Electronics');
 GO
-
 /* =========================
    Seed Categories
 ========================= */
@@ -12,6 +11,8 @@ VALUES
 ('Electronics');
 GO
 
+DELETE FROM dbo.Staff WHERE Name IN ('Alice Johnson','Bob Smith','Charlie Brown','Diana Prince')
+GO
 /* =========================
    Seed Staff
 ========================= */
@@ -23,6 +24,8 @@ VALUES
 ('Diana Prince');
 GO
 
+DELETE FROM dbo.Asset WHERE Name IN ('Dell Laptop','HP Desktop','Lenovo ThinkPad','Office Chair','Standing Desk','Printer Paper Box','Stapler','Projector','Conference Phone')
+GO
 /* =========================
    Seed Assets
 ========================= */

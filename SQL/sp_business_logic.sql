@@ -1,5 +1,8 @@
 /* Assign asset to staff */
-CREATE PROCEDURE sp_Asset_AssignToStaff
+IF OBJECT_ID('dbo.sp_Asset_AssignToStaff', 'P') IS NOT NULL
+    DROP PROCEDURE dbo.sp_Asset_AssignToStaff;
+GO
+CREATE PROCEDURE dbo.sp_Asset_AssignToStaff
 (
  @AssetId INT,
  @StaffId INT
@@ -16,7 +19,10 @@ END
 GO
 
 /* Unassign asset from staff */
-CREATE PROCEDURE sp_Asset_UnassignFromStaff
+IF OBJECT_ID('dbo.sp_Asset_UnassignFromStaff', 'P') IS NOT NULL
+    DROP PROCEDURE dbo.sp_Asset_UnassignFromStaff;
+GO
+CREATE PROCEDURE dbo.sp_Asset_UnassignFromStaff
 (
  @AssetId INT,
  @StaffId INT
@@ -31,7 +37,10 @@ END
 GO
 
 /* Mark asset as available */
-CREATE PROCEDURE sp_Asset_MarkAsAvailable
+IF OBJECT_ID('dbo.sp_Asset_MarkAsAvailable', 'P') IS NOT NULL
+    DROP PROCEDURE dbo.sp_Asset_MarkAsAvailable;
+GO
+CREATE PROCEDURE dbo.sp_Asset_MarkAsAvailable
 ( @AssetId INT )
 AS
 BEGIN
@@ -43,7 +52,10 @@ END
 GO
 
 /* Mark asset as assigned */
-CREATE PROCEDURE sp_Asset_MarkAsAssigned
+IF OBJECT_ID('dbo.sp_Asset_MarkAsAssigned', 'P') IS NOT NULL
+    DROP PROCEDURE dbo.sp_Asset_MarkAsAssigned;
+GO
+CREATE PROCEDURE dbo.sp_Asset_MarkAsAssigned
 ( @AssetId INT )
 AS
 BEGIN
