@@ -28,7 +28,6 @@ public partial class Pages_Forms_AssetForm : System.Web.UI.Page
             BindValuesToCategoryDropdown();
             BindValuesToStatusDropdown();
             BindValuesToAssignToStaffDropdown();
-            BindValuesToAssignToStaffDropdown();
 
             var idParam = Request.QueryString["id"];
 
@@ -45,6 +44,9 @@ public partial class Pages_Forms_AssetForm : System.Web.UI.Page
 
     protected void BtnSubmit_Click(object sender, EventArgs e)
     {
+        if (!Page.IsValid)
+            return;
+
         var dto = new DBAsset
         {
             Name = AssetName.Text,
@@ -52,7 +54,7 @@ public partial class Pages_Forms_AssetForm : System.Web.UI.Page
             Status = AssetStatus.SelectedValue
         };
 
-        if (AssignedToStaff.SelectedValue != "0")
+        if (!string.IsNullOrEmpty(AssignedToStaff.SelectedValue) && AssignedToStaff.SelectedValue != "0")
         {
             dto.AssignedToStaffId = int.Parse(AssignedToStaff.SelectedValue);
         }
@@ -72,34 +74,35 @@ public partial class Pages_Forms_AssetForm : System.Web.UI.Page
             _assetRepo.UpdateAsset(dto);
         }
 
-        Response.Redirect("/");
+        Response.Redirect("~/");
     }
 
     protected void BackBtn_Click(object sender, EventArgs e)
     {
-        Response.Redirect("/");
+        Response.Redirect("~/");
     }
 
-    private void BindValuesToCategoryDropdown() 
+    private void BindValuesToCategoryDropdown()
     {
         var categories = _categoryRepo.GetCategories();
 
         AssetCategory.DataSource = categories;
-        AssetCategory.DataTextField = "Name"; // what user sees
-        AssetCategory.DataValueField = "Id";  // actual value
+        AssetCategory.DataTextField = "Name";
+        AssetCategory.DataValueField = "Id";
 
         AssetCategory.DataBind();
+
         AssetCategory.Items.Insert(0, new ListItem("-- Select Category --", ""));
     }
 
     private void BindValuesToStatusDropdown()
     {
-        AssetStatus.Items.Add(new ListItem("-- Select Status --", ""));
+        AssetStatus.Items.Insert(0, new ListItem("-- Select Status --", ""));
         AssetStatus.Items.Add("Available");
         AssetStatus.Items.Add("Assigned");
         AssetStatus.Items.Add("Damaged");
 
-        AssetCategory.DataBind();
+        AssetStatus.DataBind();
         AssetStatus.SelectedValue = "Available";
     }
 
@@ -115,6 +118,21 @@ public partial class Pages_Forms_AssetForm : System.Web.UI.Page
         AssignedToStaff.Items.Insert(0, new ListItem("-- Select Assignee --", ""));
     }
 
+    protected void AssignedToStaffValidator_ServerValidate(object source, ServerValidateEventArgs args)
+    {
+        var status = AssetStatus.SelectedValue;
+        var staff = AssignedToStaff.SelectedValue;
+
+        if (status == "Assigned" && string.IsNullOrEmpty(staff))
+        {
+            args.IsValid = false;
+        }
+        else
+        {
+            args.IsValid = true;
+        }
+    }
+
     private void LoadAsset(int assetId)
     {
         var asset = _assetRepo.GetAssetById(assetId);
@@ -122,7 +140,7 @@ public partial class Pages_Forms_AssetForm : System.Web.UI.Page
         if (asset == null)
         {
             // Handle not found
-            Response.Redirect("/");
+            Response.Redirect("~/");
             return;
         }
 
