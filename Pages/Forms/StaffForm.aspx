@@ -4,9 +4,16 @@
   <h1 id="formTitle" runat="server">Add new staff</h1>
   <asp:Label ID="StaffNameLabel" runat="server" Text="Enter Staff Name: " />
   <asp:TextBox ID="StaffName" runat="server" />
+  <asp:RequiredFieldValidator
+    ForeColor="Red"
+    ErrorMessage="Staff name is required"
+    ControlToValidate="StaffName"
+    ID="StaffNameVld"
+    runat="server"
+  />
   <br /><br />
 
   <asp:Button ID="backBtn" runat="server" Text="Back" OnClick="BackBtn_Click" CssClass="btn btn-outlined"/>
-  <asp:Button ID="btnSubmit" runat="server" Text="Submit" OnClick="BtnSubmit_Click" CssClass="btn btn-contained"/>
+  <asp:Button ID="btnSubmit" runat="server" Text="Create staff" OnClick="BtnSubmit_Click" CssClass="btn btn-contained"/>
   <br /><br />
 </asp:Content>
